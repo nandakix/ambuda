@@ -1,17 +1,16 @@
 services:
-  # db setup
   - type: db
     name: ambuda-db
     env: docker
-    repo: https://github.com/kvchitrapu/ambuda.git # optional
-    region: oregon # optional (defaults to oregon)
-    plan: standard # optional (defaults to starter)
-    branch: try-flying # optional (defaults to master)
+    repo: https://github.com/kvchitrapu/ambuda.git
+    region: oregon
+    plan: standard
+    branch: try-flying
     rootDir: ambuda
-    dockerCommand: /app/scripts/initialize_data.sh # optional (defaults to Dockerfile command)
+    dockerCommand: /app/scripts/initialize_data.sh
     dockerfilePath: ./build/container/Dockerfile.final
     dockerContext: .
-    numInstances: 1 # optional (defaults to 1)
+    numInstances: 1
     healthCheckPath: /
     envVars:
       - key: FLASK_ENV
@@ -25,12 +24,12 @@ services:
       - key: SECRET_KEY
         value: insecure key
       - key: GOOGLE_APPLICATION_CREDENTIALS
-        value: "api.file"
+        value: api.file
       - key: REDIS_URL
         fromService:
           type: redis
           name: redis
-           property: connectionString
+          property: connectionString
       - key: VIRTUAL_ENV
         value: .
       - key: AMBUDA_BOT_PASSWORD
@@ -39,20 +38,18 @@ services:
         value: /app/data/vidyut
       - key: PATH
         value: $PATH:/venv/bin/
-  
-  # Ambuda web service
   - type: web
     name: ambuda-web
     env: docker
-    repo: https://github.com/kvchitrapu/ambuda.git # optional
-    region: oregon # optional (defaults to oregon)
-    plan: standard # optional (defaults to starter)
-    branch: try-flying # optional (defaults to master)
+    repo: https://github.com/kvchitrapu/ambuda.git
+    region: oregon
+    plan: standard
+    branch: try-flying
     rootDir: ambuda
-    dockerCommand: /app/scripts/initialize_data.sh # optional (defaults to Dockerfile command)
+    dockerCommand: /app/scripts/initialize_data.sh
     dockerfilePath: ./build/container/Dockerfile.final
     dockerContext: .
-    numInstances: 1 # optional (defaults to 1)
+    numInstances: 1
     envVars:
       - key: FLASK_ENV
         value: development
@@ -65,12 +62,12 @@ services:
       - key: SECRET_KEY
         value: insecure key
       - key: GOOGLE_APPLICATION_CREDENTIALS
-        value: "api.file"
+        value: api.file
       - key: REDIS_URL
         fromService:
           type: redis
           name: redis
-           property: connectionString
+          property: connectionString
       - key: VIRTUAL_ENV
         value: .
       - key: AMBUDA_BOT_PASSWORD
@@ -79,46 +76,40 @@ services:
         value: /app/data/vidyut
       - key: PATH
         value: $PATH:/venv/bin/
-  
-# Ambuda web service
   - type: worker
     name: celery
     env: docker
-    repo: https://github.com/kvchitrapu/ambuda.git # optional
-    region: oregon # optional (defaults to oregon)
-    plan: standard # optional (defaults to starter)
-    branch: try-flying # optional (defaults to master)
+    repo: https://github.com/kvchitrapu/ambuda.git
+    region: oregon
+    plan: standard
+    branch: try-flying
     rootDir: ambuda
-    dockerCommand: /app/scripts/start_celery.sh # optional (defaults to Dockerfile command)
+    dockerCommand: /app/scripts/start_celery.sh
     dockerfilePath: ./build/container/Dockerfile.final
     dockerContext: .
-    numInstances: 1 # optional (defaults to 1)
+    numInstances: 1
     envVars:
       - key: REDIS_URL
         fromService:
           type: redis
           name: redis
-           property: connectionString
+          property: connectionString
       - key: VIRTUAL_ENV
         value: .
       - key: PATH
         value: $PATH:/venv/bin/
-  
-  # A Redis instance
   - type: redis
     name: redis
-    ipAllowList: # required
+    ipAllowList:
       - source: 0.0.0.0/0
         description: everywhere
-    plan: free # optional (defaults to starter)
-    maxmemoryPolicy: noeviction # optional (defaults to allkeys-lru)
-
+    plan: free
+    maxmemoryPolicy: noeviction
 databases:
   - name: ambuda_staging_db
-    databaseName: ambuda_db # optional (Render may add a suffix)
-    user: ambuda_devbot # optional
-    ipAllowList: []# optional (defaults to allow all)
-
+    databaseName: ambuda_db
+    user: ambuda_devbot
+    ipAllowList: []
 envVarGroups:
   - name: conc-settings
     envVars:
