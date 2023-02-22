@@ -2,7 +2,7 @@ services:
   - type: pserv
     name: ambuda-db
     env: docker
-    repo: https://github.com/kvchitrapu/ambuda.git
+    repo: https://github.com/nandakix/ambuda.git
     region: oregon
     plan: free
     branch: render-cicd
@@ -40,7 +40,7 @@ services:
   - type: web
     name: ambuda-web
     env: docker
-    repo: https://github.com/kvchitrapu/ambuda.git
+    repo: https://github.com/nandakix/ambuda.git
     region: oregon
     plan: free
     branch: render-cicd
@@ -78,7 +78,7 @@ services:
   - type: worker
     name: celery
     env: docker
-    repo: https://github.com/kvchitrapu/ambuda.git
+    repo: https://github.com/nandakix/ambuda.git
     region: oregon
     plan: free
     branch: render-cicd
@@ -107,6 +107,7 @@ services:
 databases:
   - name: ambuda_staging_db
     databaseName: ambuda_db
+    plan: free
     user: ambuda_devbot
     ipAllowList: []
 envVarGroups:
