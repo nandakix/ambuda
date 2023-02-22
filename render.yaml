@@ -4,7 +4,7 @@ services:
     env: docker
     repo: https://github.com/kvchitrapu/ambuda.git
     region: oregon
-    plan: standard
+    plan: free
     branch: render-cicd
     rootDir: ambuda
     dockerCommand: /app/scripts/initialize_data.sh
@@ -42,7 +42,7 @@ services:
     env: docker
     repo: https://github.com/kvchitrapu/ambuda.git
     region: oregon
-    plan: standard
+    plan: free
     branch: render-cicd
     rootDir: ambuda
     dockerCommand: /app/scripts/initialize_data.sh
@@ -80,7 +80,7 @@ services:
     env: docker
     repo: https://github.com/kvchitrapu/ambuda.git
     region: oregon
-    plan: standard
+    plan: free
     branch: render-cicd
     rootDir: ambuda
     dockerCommand: /app/scripts/start_celery.sh
