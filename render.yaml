@@ -19,7 +19,9 @@ services:
       - key: FLASK_UPLOAD_FOLDER
         value: /app/data/file-uploads
       - key: SQLALCHEMY_DATABASE_URI
-        value: sqlite:////app/data/database/database.db #FIXME: check postgres
+        fromDatabase:
+          name: ambuda_staging_db
+          property: connectionString
       - key: SECRET_KEY
         value: insecure key
       - key: GOOGLE_APPLICATION_CREDENTIALS
