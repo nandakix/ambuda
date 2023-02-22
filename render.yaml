@@ -1,5 +1,5 @@
 services:
-  - type: db
+  - type: pserv
     name: ambuda-db
     env: docker
     repo: https://github.com/kvchitrapu/ambuda.git
